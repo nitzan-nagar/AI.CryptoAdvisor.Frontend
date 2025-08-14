@@ -1,0 +1,42 @@
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* שתי עמודות */
+  gap: 20px;
+  padding: 20px;
+  align-items: flex-start;
+
+}
+
+.meme-img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+
+.card-content p {
+  margin: 5px 0;
+}
+
+.coin-img{
+  height: 20px;   /* גובה מקסימלי */
+  width: auto;     /* שמירה על פרופורציות */
+  margin: 5px;     /* רווח סביב התמונה */
+}
+.meme-img {
+  height: 200px;   /* גובה מקסימלי */
+  width: auto;     /* שמירה על פרופורציות */
+  margin: 5px;     /* רווח סביב התמונה */
+  border-radius: 4px; /* אופציונלי – עיגול פינות */
+  display: inline-block; /* לא לשבור שורה */
+}
+
+.overlay-meme {
+  position: fixed;      /* נשאר מעל כל הדף גם בגלילה */
+  top: 50%;             /* מרכז אנכי */
+  left: 50%;            /* מרכז אופקי */
+  transform: translate(-50%, -50%); /* תיקון למרכז */
+  width: 50vw;          /* 70% מרוחב חלון הדפדפן */
+  height: auto;         /* שמירה על פרופורציות */
+  z-index: 9999;        /* מעל כל השאר */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4); /* אופציונלי – צל */
+}

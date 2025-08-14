@@ -1,0 +1,67 @@
+.auth-page {
+  display: flex;
+  justify-content: center; /* ממרכז לרוחב */
+  align-items: flex-start;
+  min-height: 100vh; /* תופס את כל גובה המסך */
+  background-color: #0A1F44; /* כחול כהה לרקע */
+  padding: 20px; /* רווח מהקצוות במובייל */
+  box-sizing: border-box;
+}
+
+.auth-box {
+  background-color: #f0f4ff; /* בהיר יותר מהרקע */
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 400px; /* רוחב מקסימלי */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* כותרת */
+.auth-box h2 {
+  margin: 0 0 20px 0;
+  color: #0A1F44; /* צבע כהה לכותרת */
+  text-align: center;
+}
+
+/* קלטים */
+.auth-box input {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+}
+
+/* כפתורים */
+.auth-box button {
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: none;
+  background-color: #0A1F44;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.auth-box button:hover {
+  background-color: #142a66;
+}
+
+/* קישורים */
+.auth-box a {
+  color: #0A1F44;
+  text-decoration: underline;
+}
+
+/* שגיאות */
+.auth-box p {
+  color: darkblue;
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+}

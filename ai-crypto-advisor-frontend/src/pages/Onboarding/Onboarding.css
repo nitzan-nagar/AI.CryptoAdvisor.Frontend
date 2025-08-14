@@ -1,0 +1,71 @@
+.onboarding-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: #0A1F44;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.onboarding-box {
+  background-color: #f0f4ff;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* רווח בין label ל-input */
+}
+
+.onboarding-title {
+  margin: 0 0 20px 0;
+  color: #0A1F44;
+  text-align: center;
+}
+
+.onboarding-input, 
+.onboarding-box select {
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+}
+
+.onboarding-button {
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: none;
+  background-color: #0A1F44;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 10px;
+}
+
+.onboarding-button:hover {
+  background-color: #142a66;
+}
+
+.onboarding-error {
+  color: darkblue;
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+}
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* רווח בין הצ'קבוקסים */
+}
