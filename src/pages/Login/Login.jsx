@@ -17,6 +17,7 @@ const Login = () => {
 
   const login = async () => {
     try {
+      console.log("API URL:", apiUrl);
       const res = await axios.post(`${apiUrl}/api/auth/login`, { email, password });
       localStorage.setItem("token", res.data.token);
       if (res.data.needsOnboarding) {
