@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from "../../components/Header/Header.jsx";
 import '../Auth/Auth.css'
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
 
 
 const Login = () => {

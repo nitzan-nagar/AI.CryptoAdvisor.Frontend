@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../../components/Header/Header.jsx";
 import './Onboarding.css';
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;;
 
 
 const Onboarding = () => {
