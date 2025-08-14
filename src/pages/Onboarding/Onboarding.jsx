@@ -56,7 +56,7 @@ const Onboarding = () => {
     }
 
     try {
-      await axios.post("https://ai-crypto-advisor-backend.onrender.com/api/me/preferences", { investorType, preferredAssets, contentTypes },
+      await axios.post(`${apiUrl}/api/me/preferences`, { investorType, preferredAssets, contentTypes },
         {
           headers: {
             Authorization: `Bearer ${token}`,
