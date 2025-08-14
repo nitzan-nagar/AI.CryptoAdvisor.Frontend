@@ -20,7 +20,7 @@ const Login = () => {
       console.log("API URL:", apiUrl);
       const res = await axios.post(`${apiUrl}/api/auth/login`, { email, password });
       localStorage.setItem("token", res.data.token);
-      if (res.data.needsOnboarding) {
+      if (res?.data?.needsOnboarding) {
         navigate("/onboarding");
       } else {
         navigate("/dashboard");
