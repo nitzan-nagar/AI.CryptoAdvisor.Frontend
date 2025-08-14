@@ -7,7 +7,6 @@ import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import './App.css';
 
 function App() {
-  const token = localStorage.getItem('token');
 
   return (
     <BrowserRouter>
@@ -16,7 +15,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );
