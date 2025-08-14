@@ -69,7 +69,7 @@ const Register = () => {
           />
         <button className="auth-button" onClick={register}>Register</button>
         {error && <p className="auth-error">{error}</p>}
-        <p className="auth-footer-text">Already have an account? <a href="/login">Login</a></p>
+        <p className="auth-footer-text">Already have an account? <a onClick={() => navigate("/login")}>Login</a></p>
       </div>
     </div>
     </>

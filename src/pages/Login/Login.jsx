@@ -50,7 +50,7 @@ const Login = () => {
             />
             <button className="auth-button" onClick={login}>Login</button>
             {error && <p className="auth-error">{error}</p>}
-            <p className="auth-footer-text">Don't have an account? <a href="/register">Register</a></p>
+            <p className="auth-footer-text">Don't have an account? <a onClick={() => navigate("/register")}>Register</a></p>
         </div>
       </div>
     </>
