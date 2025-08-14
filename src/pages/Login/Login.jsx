@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Header from "../../components/Header/Header.jsx";
 import '../Auth/Auth.css'
 
@@ -8,6 +9,8 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -17,9 +20,9 @@ const Login = () => {
       const res = await axios.post(`${apiUrl}/api/auth/login`, { email, password });
       localStorage.setItem("token", res.data.token);
       if (res.data.needsOnboarding) {
-        window.location.href = "/onboarding";
+        navigate("/onboarding");
       } else {
-        window.location.href = "/dashboard";
+        navigate("/dashboard");
       }
     } catch (err) {
       setError(err.response.data);
