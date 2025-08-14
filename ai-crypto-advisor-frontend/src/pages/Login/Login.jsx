@@ -4,6 +4,9 @@ import { useState } from 'react'
 import Header from "../../components/Header/Header.jsx";
 import '../Auth/Auth.css'
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,7 +14,7 @@ const Login = () => {
 
   const login = async () => {
     try {
-      const res = await axios.post("https://ai-crypto-advisor-backend.onrender.com/api/auth/login", { email, password });
+      const res = await axios.post(`${apiUrl}/api/auth/login`, { email, password });
       localStorage.setItem("token", res.data.token);
       if (res.data.needsOnboarding) {
         window.location.href = "/onboarding";

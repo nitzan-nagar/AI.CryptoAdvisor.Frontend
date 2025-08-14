@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate  } from "react-router-dom";
 import Header from "../../components/Header/Header.jsx";
 
+const apiUrl = process.env.REACT_APP_API_URL;
 
 
 const Register = () => {
@@ -21,7 +22,7 @@ const Register = () => {
       return;
     }
     try {
-      const res = await axios.post("https://ai-crypto-advisor-backend.onrender.com/api/auth/register", { name, email, password, confirmPassword });
+      const res = await axios.post(`${apiUrl}/api/auth/register`, { name, email, password, confirmPassword });
       localStorage.setItem("token", res.data.token);
       setError(null);
       navigate("/onboarding"); 

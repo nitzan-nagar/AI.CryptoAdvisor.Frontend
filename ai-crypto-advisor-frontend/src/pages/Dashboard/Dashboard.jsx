@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "../../components/Card/Card.jsx";
 import Header from "../../components/Header/Header.jsx";
 import "./Dashboard.css";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function Dashboard() {
   const token = localStorage.getItem("token");
@@ -20,7 +21,7 @@ export default function Dashboard() {
   const fetchData = async () => {
     setLoading(true);
       try {
-      const res = await axios.get("https://ai-crypto-advisor-backend.onrender.com/api/dashboard", {
+      const res = await axios.get(`${apiUrl}/api/dashboard`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../../components/Header/Header.jsx";
 import './Onboarding.css';
+const apiUrl = process.env.REACT_APP_API_URL;
+
 
 const Onboarding = () => {
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ const Onboarding = () => {
   useEffect(() => {
   const fetchPreferences = async () => {
     try {
-      const res = await axios.get("https://ai-crypto-advisor-backend.onrender.com/api/me/preferences", {
+      const res = await axios.get(`${apiUrl}/api/me/preferences`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.data) {
