@@ -19,7 +19,7 @@ const Onboarding = () => {
   useEffect(() => {
   const fetchPreferences = async () => {
     try {
-      const res = await axios.get("https://localhost:7140/api/me/preferences", {
+      const res = await axios.get("https://ai-crypto-advisor-backend.onrender.com/api/me/preferences", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.data) {
@@ -54,7 +54,7 @@ const Onboarding = () => {
     }
 
     try {
-      await axios.post("https://localhost:7140/api/me/preferences", { investorType, preferredAssets, contentTypes },
+      await axios.post("https://ai-crypto-advisor-backend.onrender.com/api/me/preferences", { investorType, preferredAssets, contentTypes },
         {
           headers: {
             Authorization: `Bearer ${token}`,

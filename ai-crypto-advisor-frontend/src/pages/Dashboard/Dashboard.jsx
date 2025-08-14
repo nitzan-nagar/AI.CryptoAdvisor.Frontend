@@ -20,7 +20,7 @@ export default function Dashboard() {
   const fetchData = async () => {
     setLoading(true);
       try {
-      const res = await axios.get("https://localhost:7140/api/dashboard", {
+      const res = await axios.get("https://ai-crypto-advisor-backend.onrender.com/api/dashboard", {
         headers: { Authorization: `Bearer ${token}` },
       });
 

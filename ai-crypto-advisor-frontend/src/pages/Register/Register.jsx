@@ -21,7 +21,7 @@ const Register = () => {
       return;
     }
     try {
-      const res = await axios.post("https://localhost:7140/api/auth/register", { name, email, password, confirmPassword });
+      const res = await axios.post("https://ai-crypto-advisor-backend.onrender.com/api/auth/register", { name, email, password, confirmPassword });
       localStorage.setItem("token", res.data.token);
       setError(null);
       navigate("/onboarding"); 

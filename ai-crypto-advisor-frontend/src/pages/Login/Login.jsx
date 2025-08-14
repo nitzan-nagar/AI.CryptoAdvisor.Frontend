@@ -11,7 +11,7 @@ const Login = () => {
 
   const login = async () => {
     try {
-      const res = await axios.post("https://localhost:7140/api/auth/login", { email, password });
+      const res = await axios.post("https://ai-crypto-advisor-backend.onrender.com/api/auth/login", { email, password });
       localStorage.setItem("token", res.data.token);
       if (res.data.needsOnboarding) {
         window.location.href = "/onboarding";
