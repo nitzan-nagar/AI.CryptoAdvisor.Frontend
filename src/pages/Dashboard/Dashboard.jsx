@@ -25,18 +25,17 @@ export default function Dashboard() {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      const { news, coins, insight, memes } = res.data;
+      const { news, coins, insight, memes } = res.data;   
 
-      setDashboard({
-        news: JSON.parse(news).results ?? JSON.parse(news),
-        coins: JSON.parse(coins),
-        insight: insight ?? "No AI insights available",
-        memes: JSON.parse(memes).data.children ?? JSON.parse(memes)
-      });
-      // setTimeout(() => {
-      //   setLoading(false);
-      // }, 3000);
-              setLoading(false);
+        setDashboard({
+          news: JSON.parse(news).results ?? JSON.parse(news).message,
+          coins: JSON.parse(coins) ?? JSON.parse(coins).message,
+          insight: insight ?? "No AI insights available",
+          memes: JSON.parse(memes)?.data?.children ?? JSON.parse(memes).message ?? [],
+        });
+        console.log(dashboard.news, dashboard.coins, dashboard.insight, dashboard.memes);
+        
+      setLoading(false);
 
     } catch (err) {
       // אם השרת מחזיר 401 => נשלח את המשתמש ל-login
@@ -79,7 +78,7 @@ export default function Dashboard() {
         </Card>
 
         <Card title="Fun Crypto Meme" cardType="meme">
-          {dashboard.memes.length > 0 ? dashboard.memes.map((m) => (
+          {Array.isArray(dashboard.memes) && dashboard.memes.length > 0 ? dashboard.memes.map((m) => (
             <img src={m.data.url} alt="Crypto Meme" className="meme-img" />
           )) : (
             <p>No memes available</p>
