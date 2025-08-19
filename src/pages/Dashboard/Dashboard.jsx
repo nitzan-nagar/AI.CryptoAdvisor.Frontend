@@ -69,7 +69,7 @@ export default function Dashboard() {
         <Card title="Coin Prices" cardType="coins">
           <p>Source: <a href="https://www.coingecko.com/">CoinGecko</a></p>
           {dashboard.coins.length > 0 
-            ? dashboard.coins.map((c) => <p key={c.id}><img src={c.image} alt={c.name} className="coin-img" />{c.name}: {c.current_price}</p>) 
+            ? dashboard.coins.map((c) => <p key={c.id}><img src={c.image} alt={c.name} className="coin-img" />{c.name}: {c.current_price} USD</p>) 
             : <p>No coins</p>}
         </Card>
 
