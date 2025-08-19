@@ -15,7 +15,7 @@ const Onboarding = () => {
   const [contentTypes, setContentTypes] = useState([]);
   const [error, setError] = useState("");
 
-  const contentOptions = ["Market News", "Charts", "Social", "Fun"];
+  const contentOptions = ["Market News", "Coin Prices", "AI Insights", "Memes"];
   const investorOptions = ["HODLer", "Day Trader", "NFT Collector"];
 
   useEffect(() => {

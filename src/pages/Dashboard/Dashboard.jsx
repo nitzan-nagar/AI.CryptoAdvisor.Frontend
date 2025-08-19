@@ -17,27 +17,49 @@ export default function Dashboard() {
   });
   const [loading, setLoading] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true);
+  const [sortedCards, setSortedCards] = useState([]);
+
   
 
   useEffect(() => {
   const fetchData = async () => {
     setLoading(true);
-      try {
-      const res = await axios.get(`${apiUrl}/api/dashboard`, {
+
+    try {
+      const dashRes = await axios.get(`${apiUrl}/api/dashboard`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      const { news, coins, insight, memes } = res.data;   
-        setDashboard({
-          news: JSON.parse(news).results ?? JSON.parse(news).message,
-          coins: JSON.parse(coins) ?? JSON.parse(coins).message,
-          insight: insight ?? "No AI insights available",
-          memes: JSON.parse(memes)?.data?.children ?? JSON.parse(memes).message ?? [],
-        });
-        console.log(dashboard.news, dashboard.coins, dashboard.insight, dashboard.memes);
-        
-      setLoading(false);
+      const { news, coins, insight, memes } = dashRes.data;
+      const parsedDashboard = {
+        news: JSON.parse(news).results ?? JSON.parse(news).message,
+        coins: JSON.parse(coins) ?? JSON.parse(coins).message,
+        insight: insight ?? "No AI insights available",
+        memes: JSON.parse(memes)?.data?.children ?? JSON.parse(memes).message ?? [],
+      };
 
+      const prefRes = await axios.get(`${apiUrl}/api/me/preferences`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const prefs = prefRes.data;
+
+        // 3. בונים את allCards עם תוכן מעודכן
+        const allCards = [
+          { type: "news", title: "Market News", content: parsedDashboard.news },
+          { type: "coins", title: "Coin Prices", content: parsedDashboard.coins },
+          { type: "ai-insight", title: "AI Insights", content: parsedDashboard.insight },
+          { type: "memes", title: "Memes", content: parsedDashboard.memes },
+        ];
+
+        // 4. מיון לפי העדפות
+        const sorted = [
+          ...prefs.contentTypes.map(pref => allCards.find(c => c.title === pref)).filter(Boolean),
+          ...allCards.filter(c => !prefs.contentTypes.includes(c.title)),
+        ];
+      setDashboard(parsedDashboard);
+      setSortedCards(sorted);
+      setLoading(false);
+      
     } catch (err) {
       // אם השרת מחזיר 401 => נשלח את המשתמש ל-login
       if (err.response?.status === 401) {
@@ -48,6 +70,7 @@ export default function Dashboard() {
         console.error("Error fetching dashboard:", err);
       }
     }
+    
   };
   fetchData();
 }, []);
@@ -60,42 +83,31 @@ export default function Dashboard() {
     <>
       <Header />
       <div className="dashboard-grid">
-
-        <Card title="Market News" cardType="news">
-          {dashboard.news.length > 0 
-            ? dashboard.news.map((n) => <p key={n.id}>{n.title}</p>) 
-            : <p>No news</p>}
-        </Card>
-
-        <Card title="Coin Prices" cardType="coins">
-          <p>Source: <a href="https://www.coingecko.com/">CoinGecko</a></p>
-          {dashboard.coins.length > 0 
-            ? dashboard.coins.map((c) => <p key={c.id}><img src={c.image} alt={c.name} className="coin-img" />{c.name}: {c.current_price} USD</p>) 
-            : <p>No coins</p>}
-        </Card>
-
-        <Card title="AI Insight of the Day" cardType="ai-insight">
-          <p>{dashboard.insight}</p>
-        </Card>
-
-        <Card title="Fun Crypto Meme" cardType="meme">
-          {Array.isArray(dashboard.memes) && dashboard.memes.length > 0 ? dashboard.memes.map((m) => (
-            <img src={m.data.url} alt="Crypto Meme" className="meme-img" />
-          )) : (
-            <p>No memes available</p>
-          )}
-        </Card>
+        {sortedCards.map(card => (
+          <Card key={card.type} title={card.title} cardType={card.type}>
+            {card.type === "news" && card.content.length > 0
+              ? card.content.map(n => <p key={n.id}>{n.title}</p>)
+              : card.type === "coins" && card.content.length > 0
+              ? card.content.map(c => <p key={c.id}><img src={c.image} alt={c.name} className="coin-img" />{c.name}: {c.current_price} USD</p>)
+              : card.type === "memes" && Array.isArray(card.content) && card.content.length > 0
+              ? card.content.map(m => <img key={m.data.id} src={m.data.url} alt="Crypto Meme" className="meme-img" />)
+              : card.type === "ai-insight"
+              ? <p>{card.content}</p>
+              : <p>No content</p>
+            }
+          </Card>
+        ))}
       </div>
-      {showOverlay && (
-        <div className="overlay">
-          <img
-            className="overlay-meme"
-            src="https://preview.redd.it/dont-worry-little-brother-v0-qd3isrdooaqc1.jpeg?width=1080&crop=smart&auto=webp&s=8e9e3d12134c48fbded1679f629c81a3cceb5055"
-            alt="Crypto Meme"
-          />
-          {!loading && <button className="overlay-close-btn" onClick={() => setShowOverlay(false)}>X</button>}
-        </div>
-      )}
+        {showOverlay && (
+          <div className="overlay">
+            <img
+              className="overlay-meme"
+              src="https://preview.redd.it/dont-worry-little-brother-v0-qd3isrdooaqc1.jpeg?width=1080&crop=smart&auto=webp&s=8e9e3d12134c48fbded1679f629c81a3cceb5055"
+              alt="Crypto Meme"
+            />
+            {!loading && <button className="overlay-close-btn" onClick={() => setShowOverlay(false)}>X</button>}
+          </div>
+        )}
     </>
   );
 }
