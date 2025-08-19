@@ -16,6 +16,8 @@ export default function Dashboard() {
     memes: [],
   });
   const [loading, setLoading] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(true);
+  
 
   useEffect(() => {
   const fetchData = async () => {
@@ -26,7 +28,6 @@ export default function Dashboard() {
       });
 
       const { news, coins, insight, memes } = res.data;   
-
         setDashboard({
           news: JSON.parse(news).results ?? JSON.parse(news).message,
           coins: JSON.parse(coins) ?? JSON.parse(coins).message,
@@ -85,8 +86,16 @@ export default function Dashboard() {
           )}
         </Card>
       </div>
-      {loading && <img className="overlay-meme" src={"https://preview.redd.it/dont-worry-little-brother-v0-qd3isrdooaqc1.jpeg?width=1080&crop=smart&auto=webp&s=8e9e3d12134c48fbded1679f629c81a3cceb5055"} alt="Crypto Meme" />}
+      {showOverlay && (
+        <div className="overlay">
+          <img
+            className="overlay-meme"
+            src="https://preview.redd.it/dont-worry-little-brother-v0-qd3isrdooaqc1.jpeg?width=1080&crop=smart&auto=webp&s=8e9e3d12134c48fbded1679f629c81a3cceb5055"
+            alt="Crypto Meme"
+          />
+          {!loading && <button className="overlay-close-btn" onClick={() => setShowOverlay(false)}>X</button>}
+        </div>
+      )}
     </>
-    
   );
 }
