@@ -1,7 +1,12 @@
 body {
   background-color: #0A1F44;
+  color: rgb(15, 15, 35);
   margin: 0;
   font-family: Arial, sans-serif;
   justify-content: center; /* ממרכז לרוחב */
   align-items: flex-start;
+}
+
+input, textarea, select {
+  color-scheme: light;
 }

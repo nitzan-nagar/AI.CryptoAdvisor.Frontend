@@ -9,6 +9,7 @@
 }
 
 .vote-area button {
+  background-color: #ddd;
   padding: 8px 12px;
   border-radius: 10px;
   border: none;
