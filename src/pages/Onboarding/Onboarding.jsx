@@ -49,7 +49,6 @@ const Onboarding = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // בדיקת חובה
     if (!investorType || contentTypes.length === 0 || preferredAssets.length === 0) {
       setError("Please select investor type, write preferred assets and choose at least one content type.");
       return;
@@ -79,7 +78,6 @@ const Onboarding = () => {
           Welcome! Let's personalize your experience
         </h2>
 
-        {error && <p className="onboarding-error">{error}</p>}
 
         <form onSubmit={handleSubmit} className="onboarding-form">
           {/* נכסים מועדפים */}
@@ -93,7 +91,7 @@ const Onboarding = () => {
               onChange={(e) => setPreferredAssets(e.target.value)}
               placeholder="e.g. Bitcoin, Ethereum"
               className="onboarding-input"
-            />
+              />
           </div>
 
           {/* סוג משקיע */}
@@ -104,7 +102,7 @@ const Onboarding = () => {
               onChange={(e) => setInvestorType(e.target.value)}
               required
               className="onboarding-input"
-            >
+              >
               <option value="">-- Select --</option>
               {investorOptions.map((opt) => (
                 <option key={opt} value={opt}>
@@ -114,7 +112,6 @@ const Onboarding = () => {
             </select>
           </div>
 
-          {/* סוגי תוכן */}
           <div className="form-group">
             <label className="form-label">
               What kind of content would you like to see? *
@@ -127,7 +124,7 @@ const Onboarding = () => {
                     checked={contentTypes.includes(opt)}
                     onChange={() => toggleContentType(opt)}
                     className="checkbox-input"
-                  />
+                    />
                   {opt}
                 </label>
               ))}
@@ -138,6 +135,7 @@ const Onboarding = () => {
             Save Preferences
           </button>
         </form>
+        {error && <p className="onboarding-error">{error}</p>}
       </div>
     </div>
   </>

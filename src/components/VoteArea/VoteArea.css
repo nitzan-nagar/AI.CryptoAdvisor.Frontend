@@ -1,11 +1,14 @@
 .vote-area {
-  flex-shrink: 0; 
+  width: 100%;              
+  display: flex;
+  justify-content: center; 
+  align-items: center;  
+  gap: 15px;
   padding: 10px;
+  flex-shrink: 0; 
   border-top: 1px solid #ddd;
   background-color: #a3b3df;
-  display: flex;
-  justify-content: center; /* כפתורים במרכז */
-  gap: 15px; /* רווח בין הכפתורים */
+
 }
 
 .vote-area button {
@@ -20,4 +23,12 @@
 
 .vote-area button:hover {
   background-color: #d0d4e0;
+}
+
+.vote-saved-message{
+  margin: 0;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  color: green;
 }

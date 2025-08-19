@@ -1,13 +1,17 @@
-import React from 'react'
-import './VoteArea.css';
+const VoteButtons = ({ voteOnType, votedCards, handleVote }) => {
 
-const VoteArea = ({ voteOnType }) => {
   return (
     <div className="vote-area">
-      <button onClick={() => onVote(voteOnType, 1)}>👍</button>
-      <button onClick={() => onVote(voteOnType, -1)}>👎</button>
+      {votedCards[voteOnType] !== undefined ? (
+        <p className="vote-saved-message">  Vote saved successfully!</p>
+      ) : (
+        <>
+          <button onClick={() => handleVote(voteOnType, true)}>👍</button>
+          <button onClick={() => handleVote(voteOnType, false)}>👎</button>
+        </>
+      )}
     </div>
-  )
+  );
 }
 
-export default VoteArea
+export default VoteButtons;

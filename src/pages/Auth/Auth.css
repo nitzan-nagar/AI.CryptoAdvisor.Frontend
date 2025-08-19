@@ -1,20 +1,20 @@
 .auth-page {
   display: flex;
-  justify-content: center; /* ממרכז לרוחב */
+  justify-content: center; 
   align-items: flex-start;
-  min-height: 100vh; /* תופס את כל גובה המסך */
-  background-color: #0A1F44; /* כחול כהה לרקע */
-  padding: 20px; /* רווח מהקצוות במובייל */
+  min-height: 100vh; 
+  background-color: #0A1F44; 
+  padding: 20px; 
   box-sizing: border-box;
 }
 
 .auth-box {
-  background-color: #f0f4ff; /* בהיר יותר מהרקע */
+  background-color: #f0f4ff; 
   padding: 40px 30px;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   width: 100%;
-  max-width: 400px; /* רוחב מקסימלי */
+  max-width: 400px; 
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -26,7 +26,7 @@
 /* כותרת */
 .auth-box h2 {
   margin: 0 0 20px 0;
-  color: #0A1F44; /* צבע כהה לכותרת */
+  color: #0A1F44; 
   text-align: center;
 }
 

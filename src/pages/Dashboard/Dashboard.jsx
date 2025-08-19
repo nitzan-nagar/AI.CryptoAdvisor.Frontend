@@ -19,7 +19,7 @@ export default function Dashboard() {
   const [showOverlay, setShowOverlay] = useState(true);
   const [sortedCards, setSortedCards] = useState([]);
 
-  
+  const [votedCards, setVotedCards] = useState({});
 
   useEffect(() => {
   const fetchData = async () => {
@@ -43,15 +43,13 @@ export default function Dashboard() {
       });
       const prefs = prefRes.data;
 
-        // 3. בונים את allCards עם תוכן מעודכן
         const allCards = [
           { type: "news", title: "Market News", content: parsedDashboard.news },
           { type: "coins", title: "Coin Prices", content: parsedDashboard.coins },
           { type: "ai-insight", title: "AI Insights", content: parsedDashboard.insight },
           { type: "memes", title: "Memes", content: parsedDashboard.memes },
         ];
-
-        // 4. מיון לפי העדפות
+        
         const sorted = [
           ...prefs.contentTypes.map(pref => allCards.find(c => c.title === pref)).filter(Boolean),
           ...allCards.filter(c => !prefs.contentTypes.includes(c.title)),
@@ -61,7 +59,7 @@ export default function Dashboard() {
       setLoading(false);
       
     } catch (err) {
-      // אם השרת מחזיר 401 => נשלח את המשתמש ל-login
+      
       if (err.response?.status === 401) {
         localStorage.removeItem("token");
         alert("Session expired. Please log in again.");
@@ -74,17 +72,30 @@ export default function Dashboard() {
   };
   fetchData();
 }, []);
-  function handleVote(type, vote) {
-    console.log(`Voted ${vote} on ${type} card`);
-    // כאן אפשר לשלוח POST ל-Backend כדי לשמור ב-DB
-  }
 
+  async function handleVote(type, vote) {
+    if (votedCards[type]) return;
+    
+    try {
+      await axios.post(
+        `${apiUrl}/api/votes`,
+        { cardType: type, vote: vote },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      setVotedCards(prev => ({ ...prev, [type]: true }));
+      console.log(`Vote saved: ${type} -> ${vote}`);
+    } catch (err) {
+      console.error("Error saving vote:", err.response?.data?.message || err.message);
+      alert(err.response?.data?.message || "Error saving vote");
+    }
+  }
   return (
     <>
       <Header />
       <div className="dashboard-grid">
         {sortedCards.map(card => (
-          <Card key={card.type} title={card.title} cardType={card.type}>
+          <Card key={card.type} title={card.title} cardType={card.type} votedCards={votedCards} handleVote={handleVote}>
             {card.type === "news" && card.content.length > 0
               ? card.content.map(n => <p key={n.id}>{n.title}</p>)
               : card.type === "coins" && card.content.length > 0
